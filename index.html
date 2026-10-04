@@ -3,669 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You 💗</title>
-
+<title>A Little Something 💗</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Pacifico&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;overflow:hidden;font-family:"DM Sans",sans-serif;
+  background:linear-gradient(135deg,#ffd6e7,#e8d7ff,#d8f1ff);
+  display:flex;justify-content:center;align-items:center;color:#49364f
 }
+.background{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;animation:drift 12s infinite alternate ease-in-out}
+.one{width:300px;height:300px;background:#ff9ecb;top:-100px;left:-80px}
+.two{width:350px;height:350px;background:#bda1ff;right:-120px;bottom:-100px;animation-delay:2s}
+.three{width:220px;height:220px;background:#a9e9ff;left:45%;top:40%;animation-delay:4s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(50px,-40px) scale(1.2)}}
 
-body {
-    min-height: 100vh;
-    overflow: hidden;
-    font-family: "DM Sans", sans-serif;
-    background: linear-gradient(135deg, #ffd6e7, #e8d7ff, #d8f1ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #49364f;
+.card{
+  position:relative;z-index:5;width:min(92%,650px);min-height:560px;padding:45px 30px;
+  border-radius:35px;background:rgba(255,255,255,.55);backdrop-filter:blur(25px);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 30px 80px rgba(91,55,100,.18),inset 0 1px 0 rgba(255,255,255,.8);
+  display:flex;align-items:center;justify-content:center;overflow:hidden
 }
-
-/* ---------- BACKGROUND ---------- */
-
-.background {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(70px);
-    opacity: .45;
-    animation: drift 12s infinite alternate ease-in-out;
-}
-
-.blob.one {
-    width: 300px;
-    height: 300px;
-    background: #ff9ecb;
-    top: -100px;
-    left: -80px;
-}
-
-.blob.two {
-    width: 350px;
-    height: 350px;
-    background: #bda1ff;
-    right: -120px;
-    bottom: -100px;
-    animation-delay: 2s;
-}
-
-.blob.three {
-    width: 220px;
-    height: 220px;
-    background: #a9e9ff;
-    left: 45%;
-    top: 40%;
-    animation-delay: 4s;
-}
-
-@keyframes drift {
-    from { transform: translate(0,0) scale(1); }
-    to { transform: translate(50px,-40px) scale(1.2); }
-}
-
-/* ---------- CARD ---------- */
-
-.card {
-    position: relative;
-    z-index: 5;
-    width: min(92%, 650px);
-    min-height: 560px;
-    padding: 45px 30px;
-    border-radius: 35px;
-
-    background: rgba(255,255,255,.55);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-
-    border: 1px solid rgba(255,255,255,.75);
-
-    box-shadow:
-        0 30px 80px rgba(91,55,100,.18),
-        inset 0 1px 0 rgba(255,255,255,.8);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-/* ---------- SCREENS ---------- */
-
-.screen {
-    width: 100%;
-    text-align: center;
-    display: none;
-    animation: appear .7s ease;
-}
-
-.screen.active {
-    display: block;
-}
-
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(25px) scale(.97);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* ---------- TEXT ---------- */
-
-.tiny {
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #a26a92;
-    margin-bottom: 18px;
-}
-
-h1 {
-    font-size: clamp(42px, 9vw, 72px);
-    line-height: 1;
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: clamp(30px, 7vw, 48px);
-    margin-bottom: 20px;
-}
-
-.script {
-    font-family: "Pacifico", cursive;
-    color: #e46b9b;
-}
-
-p {
-    font-size: 17px;
-    line-height: 1.7;
-    max-width: 500px;
-    margin: 0 auto 25px;
-    color: #69576e;
-}
-
-/* ---------- BUTTONS ---------- */
-
-button {
-    border: none;
-    padding: 15px 27px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    transition: .25s;
-}
-
-.primary {
-    background: linear-gradient(135deg,#ff76aa,#b77cff);
-    color: white;
-    box-shadow: 0 12px 25px rgba(220,100,160,.28);
-}
-
-.primary:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 17px 30px rgba(220,100,160,.35);
-}
-
-.soft {
-    background: rgba(255,255,255,.7);
-    color: #7b5877;
-    border: 1px solid rgba(255,255,255,.9);
-}
-
-.soft:hover {
-    transform: translateY(-3px);
-}
-
-/* ---------- HEART ---------- */
-
-.big-heart {
-    width: 110px;
-    height: 110px;
-    margin: 0 auto 30px;
-
-    background: linear-gradient(135deg,#ff80ae,#c084fc);
-
-    transform: rotate(-45deg);
-    border-radius: 20px;
-
-    position: relative;
-
-    animation: heartbeat 1.5s infinite;
-    box-shadow: 0 15px 35px rgba(230,100,160,.3);
-}
-
-.big-heart::before,
-.big-heart::after {
-    content: "";
-    position: absolute;
-    width: 110px;
-    height: 110px;
-    background: inherit;
-    border-radius: 50%;
-}
-
-.big-heart::before {
-    top: -55px;
-    left: 0;
-}
-
-.big-heart::after {
-    left: 55px;
-    top: 0;
-}
-
-@keyframes heartbeat {
-    0%,100% { transform: rotate(-45deg) scale(1); }
-    50% { transform: rotate(-45deg) scale(1.12); }
-}
-
-/* ---------- FLOATING HEARTS ---------- */
-
-.floating-heart {
-    position: fixed;
-    bottom: -50px;
-    font-size: 20px;
-    pointer-events: none;
-    z-index: 10;
-
-    animation: floatUp linear forwards;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) rotate(0);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: .9;
-    }
-
-    100% {
-        transform: translateY(-110vh) rotate(35deg);
-        opacity: 0;
-    }
-}
-
-/* ---------- LETTER ---------- */
-
-.letter {
-    background: rgba(255,255,255,.6);
-    padding: 25px;
-    border-radius: 22px;
-    margin: 25px auto;
-    max-width: 500px;
-
-    border: 1px solid rgba(255,255,255,.8);
-
-    box-shadow: inset 0 1px 10px rgba(255,255,255,.7);
-}
-
-.letter p {
-    margin-bottom: 0;
-}
-
-/* ---------- CHOICES ---------- */
-
-.choices {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-#noBtn {
-    position: relative;
-}
-
-/* ---------- FINAL ---------- */
-
-.final-heart {
-    font-size: 80px;
-    animation: bounce 1.2s infinite alternate;
-    margin-bottom: 20px;
-}
-
-@keyframes bounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-12px); }
-}
-
-.small {
-    font-size: 13px;
-    color: #a18aa3;
-}
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width:500px) {
-
-    .card {
-        min-height: 560px;
-        padding: 35px 20px;
-    }
-
-    p {
-        font-size: 16px;
-    }
-
-    .big-heart {
-        width: 85px;
-        height: 85px;
-    }
-
-    .big-heart::before,
-    .big-heart::after {
-        width: 85px;
-        height: 85px;
-    }
-
-    .big-heart::before {
-        top: -42px;
-    }
-
-    .big-heart::after {
-        left: 42px;
-    }
-}
+.screen{width:100%;text-align:center;display:none;animation:appear .7s ease}
+.screen.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:none}}
+.tiny{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#a26a92;margin-bottom:18px}
+h1{font-size:clamp(42px,9vw,72px);line-height:1;margin-bottom:20px}
+h2{font-size:clamp(30px,7vw,48px);margin-bottom:20px}
+.script{font-family:"Pacifico",cursive;color:#e46b9b}
+p{font-size:17px;line-height:1.7;max-width:500px;margin:0 auto 25px;color:#69576e}
+button{border:none;padding:15px 27px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:.25s}
+.primary{background:linear-gradient(135deg,#ff76aa,#b77cff);color:white;box-shadow:0 12px 25px rgba(220,100,160,.28)}
+.primary:hover{transform:translateY(-4px) scale(1.03)}
+.soft{background:rgba(255,255,255,.7);color:#7b5877;border:1px solid rgba(255,255,255,.9)}
+.soft:hover{transform:translateY(-3px)}
+.big-heart{width:110px;height:110px;margin:0 auto 30px;background:linear-gradient(135deg,#ff80ae,#c084fc);transform:rotate(-45deg);border-radius:20px;position:relative;animation:heartbeat 1.5s infinite;box-shadow:0 15px 35px rgba(230,100,160,.3)}
+.big-heart:before,.big-heart:after{content:"";position:absolute;width:110px;height:110px;background:inherit;border-radius:50%}
+.big-heart:before{top:-55px;left:0}.big-heart:after{left:55px;top:0}
+@keyframes heartbeat{0%,100%{transform:rotate(-45deg) scale(1)}50%{transform:rotate(-45deg) scale(1.12)}}
+.floating-heart{position:fixed;bottom:-50px;font-size:20px;pointer-events:none;z-index:10;animation:floatUp linear forwards}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.9}100%{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+.letter{background:rgba(255,255,255,.6);padding:25px;border-radius:22px;margin:25px auto;max-width:500px;border:1px solid rgba(255,255,255,.8);box-shadow:inset 0 1px 10px rgba(255,255,255,.7)}
+.letter p{margin-bottom:0}
+.choices{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.final-heart{font-size:80px;animation:bounce 1.2s infinite alternate;margin-bottom:20px}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-12px)}}
+.small{font-size:13px;color:#a18aa3}
+@media(max-width:500px){.card{min-height:560px;padding:35px 20px}p{font-size:16px}.big-heart{width:85px;height:85px}.big-heart:before,.big-heart:after{width:85px;height:85px}.big-heart:before{top:-42px}.big-heart:after{left:42px}}
 </style>
 </head>
-
-
 <body>
 
 <div class="background">
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
+  <div class="blob one"></div><div class="blob two"></div><div class="blob three"></div>
 </div>
-
 
 <div class="card">
 
-    <!-- SCREEN 1 -->
+<section class="screen active" id="screen1">
+  <div class="big-heart"></div>
+  <div class="tiny">A little something for you</div>
+  <h1>Hey <span class="script">you...</span></h1>
+  <p>I made this little corner of the internet because apparently saying things normally wasn't dramatic enough. 😭</p>
+  <button class="primary" onclick="nextScreen(2)">Open it 💗</button>
+</section>
 
-    <section class="screen active" id="screen1">
+<section class="screen" id="screen2">
+  <div style="font-size:55px;margin-bottom:15px">🫣</div>
+  <div class="tiny">Okay... here we go</div>
+  <h2>I have a tiny confession.</h2>
+  <p>There's someone I've been thinking about a little more than I probably should.</p>
+  <button class="primary" onclick="nextScreen(3)">Who? 👀</button>
+</section>
 
-        <div class="big-heart"></div>
+<section class="screen" id="screen3">
+  <div class="tiny">Plot twist</div>
+  <h2>It's <span class="script">you.</span></h2>
+  <div class="letter"><p id="typing"></p></div>
+  <button class="primary" id="continueBtn" onclick="nextScreen(4)" style="display:none">There's more... 💌</button>
+</section>
 
-        <div class="tiny">A little something for you</div>
+<section class="screen" id="screen4">
+  <div style="font-size:55px;margin-bottom:15px">🌷</div>
+  <div class="tiny">The honest part</div>
+  <h2>I really <span class="script">like you.</span></h2>
+  <p>I don't want to make this weird or rush anything. I just wanted to be honest about how I feel.</p>
+  <p>I like talking to you. I like your vibe. And honestly... <b>I'd really like to see where this goes.</b></p>
+  <button class="primary" onclick="nextScreen(5)">So... 💗</button>
+</section>
 
-        <h1>
-            Hey <span class="script">you...</span>
-        </h1>
+<section class="screen" id="screen5">
+  <div class="tiny">Your turn</div>
+  <div class="final-heart">💗</div>
+  <h2>What do you think?</h2>
+  <p>No pressure. Just be honest with me. :)</p>
 
-        <p>
-            I made this little corner of the internet
-            because apparently saying things normally
-            wasn't dramatic enough. 😭
-        </p>
+  <div class="choices">
+    <button class="primary" onclick="submitChoice('I like you too ❤️')">I like you too 💕</button>
+    <button class="soft" onclick="submitChoice('Let’s see where this goes 👀')">Let's see where this goes 👀</button>
+  </div>
 
-        <button class="primary" onclick="nextScreen(2)">
-            Open it 💗
-        </button>
-
-    </section>
-
-
-    <!-- SCREEN 2 -->
-
-    <section class="screen" id="screen2">
-
-        <div style="font-size:55px;margin-bottom:15px;">
-            🫣
-        </div>
-
-        <div class="tiny">Okay... here we go</div>
-
-        <h2>
-            I have a tiny confession.
-        </h2>
-
-        <p>
-            There's someone I've been thinking about
-            a little more than I probably should.
-        </p>
-
-        <button class="primary" onclick="nextScreen(3)">
-            Who? 👀
-        </button>
-
-    </section>
-
-
-    <!-- SCREEN 3 -->
-
-    <section class="screen" id="screen3">
-
-        <div class="tiny">Plot twist</div>
-
-        <h2>
-            It's <span class="script">you.</span>
-        </h2>
-
-        <div class="letter">
-
-            <p id="typing"></p>
-
-        </div>
-
-        <button
-            class="primary"
-            id="continueBtn"
-            onclick="nextScreen(4)"
-            style="display:none;"
-        >
-            There's more... 💌
-        </button>
-
-    </section>
-
-
-    <!-- SCREEN 4 -->
-
-    <section class="screen" id="screen4">
-
-        <div style="font-size:55px;margin-bottom:15px;">
-            🌷
-        </div>
-
-        <div class="tiny">The honest part</div>
-
-        <h2>
-            I really <span class="script">like you.</span>
-        </h2>
-
-        <p>
-            I don't want to make this weird or rush anything.
-            I just wanted to be honest about how I feel.
-        </p>
-
-        <p>
-            I like talking to you.
-            I like your vibe.
-            And honestly...
-            <b>I'd really like to see where this goes.</b>
-        </p>
-
-        <button class="primary" onclick="nextScreen(5)">
-            So... 💗
-        </button>
-
-    </section>
-
-
-    <!-- SCREEN 5 -->
-
-    <section class="screen" id="screen5">
-
-        <div class="tiny">Your turn</div>
-
-        <div class="final-heart">
-            💗
-        </div>
-
-        <h2>
-            What do you think?
-        </h2>
-
-        <p>
-            No pressure. Just be honest with me. :)
-        </p>
-
-        <div class="choices">
-
-            <button class="primary" onclick="yesAnswer()">
-                I like you too 💕
-            </button>
-
-            <button
-                class="soft"
-                id="maybeBtn"
-                onclick="maybeAnswer()"
-            >
-                Let's see where this goes 👀
-            </button>
-
-        </div>
-
-        <div
-            id="answer"
-            style="
-            margin-top:25px;
-            font-size:20px;
-            font-weight:700;
-            color:#d85f94;
-            min-height:30px;
-            "
-        ></div>
-
-    </section>
+  <div id="answer" style="margin-top:25px;font-size:20px;font-weight:700;color:#d85f94;min-height:30px"></div>
+  <p class="small" id="status"></p>
+</section>
 
 </div>
 
-
 <script>
+function nextScreen(number){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById("screen"+number).classList.add("active");
+  if(number===3) startTyping();
+}
 
-/* ---------- SCREEN SYSTEM ---------- */
+let typed=false;
+function startTyping(){
+  if(typed)return;
+  typed=true;
+  const text="I don't really know how to say this without sounding ridiculously cheesy... but you've been on my mind a lot lately. And every time I see your name pop up, I can't help but smile a little.";
+  const el=document.getElementById("typing");
+  let i=0;
+  function type(){
+    if(i<text.length){el.innerHTML+=text.charAt(i++);setTimeout(type,35)}
+    else document.getElementById("continueBtn").style.display="inline-block";
+  }
+  type();
+}
 
-function nextScreen(number) {
+/*
+  IMPORTANT:
+  After you create your Formspree form, replace the URL below
+  with your Formspree endpoint.
 
-    document.querySelectorAll(".screen").forEach(screen => {
-        screen.classList.remove("active");
+  Example:
+  const FORMSPREE_URL = "https://formspree.io/f/xxxxxxxx";
+*/
+const FORMSPREE_URL = "YOUR_FORMSPREE_URL_HERE";
+
+async function submitChoice(choice){
+
+  document.querySelectorAll(".choices button").forEach(b=>b.disabled=true);
+
+  document.getElementById("answer").innerHTML="Sending your answer... 💌";
+
+  if(FORMSPREE_URL === "YOUR_FORMSPREE_URL_HERE"){
+    document.getElementById("answer").innerHTML="Thank you for being honest 💗";
+    document.getElementById("status").innerHTML="(Form connection hasn't been added yet.)";
+    createExplosion();
+    return;
+  }
+
+  try{
+    const response = await fetch(FORMSPREE_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+      },
+      body:JSON.stringify({
+        response:choice,
+        page:"crush confession"
+      })
     });
 
-    document
-        .getElementById("screen" + number)
-        .classList.add("active");
-
-    if(number === 3) {
-        startTyping();
+    if(response.ok){
+      document.getElementById("answer").innerHTML="Thank you for being honest 💗";
+      document.getElementById("status").innerHTML="Your answer has been sent. ✨";
+      createExplosion();
+    }else{
+      throw new Error("Submission failed");
     }
-
+  }catch(error){
+    document.getElementById("answer").innerHTML="Oops... something went wrong 😭";
+    document.getElementById("status").innerHTML="Please try again.";
+    document.querySelectorAll(".choices button").forEach(b=>b.disabled=false);
+  }
 }
 
-
-/* ---------- TYPING EFFECT ---------- */
-
-let typed = false;
-
-function startTyping() {
-
-    if(typed) return;
-
-    typed = true;
-
-    const text =
-        "I don't really know how to say this without sounding ridiculously cheesy... but you've been on my mind a lot lately. And every time I see your name pop up, I can't help but smile a little.";
-
-    const element = document.getElementById("typing");
-
-    let index = 0;
-
-    function type() {
-
-        if(index < text.length) {
-
-            element.innerHTML += text.charAt(index);
-
-            index++;
-
-            setTimeout(type, 35);
-
-        } else {
-
-            document.getElementById("continueBtn").style.display = "inline-block";
-
-        }
-
-    }
-
-    type();
-
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.className="floating-heart";
+  const emojis=["💗","💕","💖","💘","💞","🌷","✨","♡"];
+  heart.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(15+Math.random()*25)+"px";
+  heart.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),10000);
 }
 
+setInterval(createHeart,900);
 
-/* ---------- YES ---------- */
-
-function yesAnswer() {
-
-    document.getElementById("answer").innerHTML =
-        "WAIT... REALLY?! 😭💗";
-
-    createExplosion();
-
+function createExplosion(){
+  for(let i=0;i<30;i++) setTimeout(createHeart,i*80);
 }
-
-
-/* ---------- MAYBE ---------- */
-
-function maybeAnswer() {
-
-    document.getElementById("answer").innerHTML =
-        "Honestly... I'll take that. 👀💗";
-
-    createExplosion();
-
-}
-
-
-/* ---------- HEARTS ---------- */
-
-function createHeart() {
-
-    const heart = document.createElement("div");
-
-    heart.className = "floating-heart";
-
-    const emojis = [
-        "💗",
-        "💕",
-        "💖",
-        "💘",
-        "💞",
-        "🌷",
-        "✨",
-        "♡"
-    ];
-
-    heart.innerText =
-        emojis[Math.floor(Math.random() * emojis.length)];
-
-    heart.style.left =
-        Math.random() * 100 + "vw";
-
-    heart.style.fontSize =
-        (15 + Math.random() * 25) + "px";
-
-    heart.style.animationDuration =
-        (5 + Math.random() * 5) + "s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 10000);
-
-}
-
-
-/* Constant gentle hearts */
-
-setInterval(createHeart, 900);
-
-
-/* Big heart explosion */
-
-function createExplosion() {
-
-    for(let i = 0; i < 30; i++) {
-
-        setTimeout(() => {
-            createHeart();
-        }, i * 80);
-
-    }
-
-}
-
 </script>
 
 </body>
