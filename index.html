@@ -6,1797 +6,802 @@
 
 <title>hey, you.</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Patrick+Hand&display=swap');
-
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-
-html{
-    min-height:100%;
-}
-
-
 body{
-
     min-height:100vh;
-
-    background:#eee9e3;
-
-    color:#332d32;
-
-    font-family:"DM Sans",sans-serif;
-
+    background:#d8d2c7;
     display:flex;
-
-    align-items:center;
-
     justify-content:center;
-
-    padding:20px;
-
-    /*
-       IMPORTANT:
-       The old version had overflow:hidden.
-       This allows phones to scroll when
-       the content is taller than the screen.
-    */
-
+    align-items:center;
+    padding:10px;
     overflow-x:hidden;
     overflow-y:auto;
+    color:#38332f;
+    font-family:"DM Sans", sans-serif;
 }
 
-
-/* =========================
-   PAPER
-========================= */
+/* PAPER */
 
 .paper{
-
-    width:min(94vw,720px);
-
-    min-height:650px;
-
-    height:auto;
-
-    background:#fffaf2;
-
     position:relative;
-
+    width:min(650px, 94vw);
+    min-height:calc(100vh - 20px);
+    background:#f7f1e4;
     box-shadow:
-        0 18px 60px rgba(45,38,38,.16);
-
-    border-radius:4px;
-
-    padding:55px 65px;
-
+        0 15px 35px rgba(60,50,40,.15),
+        0 3px 8px rgba(60,50,40,.1);
+    padding:55px 55px 45px;
     overflow:hidden;
 }
 
-
-/* notebook lines */
+/* NOTEBOOK LINES */
 
 .paper::before{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
     background:
-        linear-gradient(
-            rgba(220,205,195,.17) 1px,
-            transparent 1px
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 31px,
+            rgba(117,145,165,.16) 32px
         );
-
-    background-size:100% 31px;
-
     pointer-events:none;
 }
 
+/* RED MARGIN */
 
-/* tape */
-
-.tape{
-
+.paper::after{
+    content:"";
     position:absolute;
-
-    width:105px;
-
-    height:28px;
-
-    background:rgba(248,211,180,.58);
-
-    top:18px;
-
-    left:50%;
-
-    transform:
-        translateX(-50%)
-        rotate(-2deg);
-
-    z-index:4;
+    top:0;
+    bottom:0;
+    left:45px;
+    width:1px;
+    background:rgba(190,100,100,.18);
+    pointer-events:none;
 }
 
+/* TAPE */
 
-/* little handwriting */
+.tape{
+    position:absolute;
+    top:14px;
+    left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    width:115px;
+    height:27px;
+    background:rgba(213,192,146,.72);
+    box-shadow:0 2px 3px rgba(0,0,0,.05);
+    z-index:3;
+}
+
+/* CORNER NOTES */
 
 .corner{
-
     position:absolute;
-
-    font-family:"Patrick Hand",cursive;
-
-    color:#b5a5a7;
-
-    font-size:18px;
-
+    font-family:"Patrick Hand", cursive;
+    font-size:16px;
+    color:#8b8175;
     z-index:2;
 }
 
-
-.c1{
-
-    top:25px;
-
-    right:30px;
-
-    transform:rotate(7deg);
+.corner.one{
+    top:24px;
+    right:25px;
+    transform:rotate(5deg);
 }
 
-
-.c2{
-
-    bottom:25px;
-
-    left:30px;
-
-    transform:rotate(-6deg);
-}
-
-
-/* =========================
-   SCREENS
-========================= */
-
-.screen{
-
-    display:none;
-
-    position:relative;
-
-    z-index:3;
-
-    /*
-       IMPORTANT:
-       No fixed 540px height.
-       This allows the content to
-       grow naturally on phones.
-    */
-
-    min-height:0;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    animation:show .45s ease;
-}
-
-
-.screen.active{
-
-    display:flex;
-}
-
-
-@keyframes show{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(8px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-}
-
-
-/* =========================
-   TEXT
-========================= */
-
-.hand{
-
-    font-family:"Patrick Hand",cursive;
-}
-
-
-.kicker{
-
-    color:#a9999d;
-
-    font-size:13px;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    margin-bottom:18px;
-}
-
-
-h1{
-
-    font-family:"Patrick Hand",cursive;
-
-    font-size:
-        clamp(58px,11vw,92px);
-
-    font-weight:400;
-
-    line-height:.9;
-
-    margin-bottom:25px;
-}
-
-
-h2{
-
-    font-family:"Patrick Hand",cursive;
-
-    font-size:
-        clamp(42px,8vw,66px);
-
-    font-weight:400;
-
-    line-height:.95;
-
-    margin-bottom:24px;
-}
-
-
-p{
-
-    font-size:17px;
-
-    line-height:1.8;
-
-    max-width:520px;
-
-    color:#61585d;
-
-    margin-bottom:22px;
-}
-
-
-/* =========================
-   DECORATION
-========================= */
-
-.doodle{
-
-    color:#d7778c;
-
-    font-size:34px;
-
-    margin-bottom:20px;
-
+.corner.two{
+    bottom:20px;
+    left:20px;
     transform:rotate(-7deg);
 }
 
+/* CONTENT */
 
-.underline{
-
+.content{
     position:relative;
-
-    display:inline-block;
-}
-
-
-.underline::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:-5px;
-
-    bottom:-5px;
-
-    height:7px;
-
-    border-top:2px solid #dfa0ae;
-
-    border-radius:50%;
-
-    transform:rotate(-2deg);
-}
-
-
-/* =========================
-   NOTE
-========================= */
-
-.note{
-
-    border-left:
-        3px solid #efb3c1;
-
-    padding:
-        5px 0
-        5px 18px;
-
-    margin:25px 0;
-}
-
-
-.note p{
-
-    font-family:"Patrick Hand",cursive;
-
-    font-size:25px;
-
-    line-height:1.25;
-
-    color:#51464b;
-
-    margin:0;
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn{
-
-    width:max-content;
-
-    max-width:100%;
-
-    border:
-        1px solid #ded1d0;
-
-    background:#fffdf9;
-
-    color:#4e4549;
-
-    border-radius:9px;
-
-    padding:
-        12px 18px;
-
-    font-family:inherit;
-
-    font-size:15px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 3px 0 #eadfda;
-
-    transition:.18s;
-}
-
-
-.btn:hover{
-
-    transform:
-        translateY(-2px)
-        rotate(-1deg);
-
-    box-shadow:
-        0 5px 0 #eadfda;
-}
-
-
-.btn.primary{
-
-    background:#f6c3ce;
-
-    border-color:#e9aeba;
-
-    box-shadow:
-        0 3px 0 #d996a5;
-}
-
-
-.btn.primary:hover{
-
-    box-shadow:
-        0 5px 0 #d996a5;
-}
-
-
-.buttons{
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-
-    margin-top:10px;
-}
-
-
-/* =========================
-   POLAROID
-========================= */
-
-.polaroid{
-
-    width:190px;
-
-    height:190px;
-
-    background:white;
-
-    padding:
-        12px
-        12px
-        35px;
-
-    transform:rotate(-3deg);
-
-    box-shadow:
-        0 8px 20px
-        rgba(40,30,30,.12);
-
-    margin:
-        0 0 28px 5px;
-
-    position:relative;
-}
-
-
-.fakepic{
-
-    width:100%;
-
-    height:100%;
-
-    background:
-
-        radial-gradient(
-            circle at 30% 30%,
-            #f6c8d4 0 12%,
-            transparent 13%
-        ),
-
-        radial-gradient(
-            circle at 70% 65%,
-            #e5d2f0 0 17%,
-            transparent 18%
-        ),
-
-        linear-gradient(
-            135deg,
-            #fff0e9,
-            #f1dfe9
-        );
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:44px;
-}
-
-
-.polaroid small{
-
-    position:absolute;
-
-    bottom:8px;
-
-    left:0;
-
-    right:0;
-
-    text-align:center;
-
-    font-family:
-        "Patrick Hand",
-        cursive;
-
-    font-size:17px;
-
-    color:#766a6d;
-}
-
-
-/* =========================
-   FINAL QUESTIONS
-========================= */
-
-.choice{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
-
-    width:100%;
-
-    max-width:470px;
-
-    margin-top:10px;
-}
-
-
-.choice button{
-
-    width:100%;
-
-    min-height:52px;
-
-    text-align:left;
-
-    padding:
-        14px 17px;
-
-    border:
-        1px solid #eadfd8;
-
-    border-radius:12px;
-
-    background:#fffdf9;
-
-    color:#51484c;
-
-    font-family:inherit;
-
-    font-size:15px;
-
-    line-height:1.4;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-
-.choice button:hover{
-
-    background:#fff0f3;
-
-    border-color:#efbbc6;
-
-    transform:translateX(5px);
-}
-
-
-/* answer */
-
-.result{
-
-    margin-top:25px;
-
-    font-family:
-        "Patrick Hand",
-        cursive;
-
-    font-size:28px;
-
-    color:#c7667b;
-
-    min-height:38px;
-}
-
-
-/* =========================
-   DECORATIVE STARS
-========================= */
-
-.star{
-
-    position:absolute;
-
-    color:#dca0ac;
-
-    font-size:16px;
-
     z-index:2;
 }
 
-
-.s1{
-
-    top:100px;
-
-    right:80px;
+.screen{
+    display:none;
+    min-height:0;
+    flex-direction:column;
+    justify-content:center;
 }
 
-
-.s2{
-
-    top:180px;
-
-    right:35px;
+.screen.active{
+    display:flex;
+    animation:appear .45s ease;
 }
 
-
-.s3{
-
-    bottom:110px;
-
-    right:90px;
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
+/* TEXT */
 
-.s4{
-
-    bottom:90px;
-
-    left:100px;
+.small{
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:#8d8276;
+    margin-bottom:13px;
 }
 
+h1{
+    font-family:"Patrick Hand", cursive;
+    font-size:clamp(42px, 8vw, 64px);
+    line-height:1;
+    font-weight:400;
+    margin-bottom:22px;
+}
 
-.s5{
+h2{
+    font-family:"Patrick Hand", cursive;
+    font-size:clamp(34px, 7vw, 50px);
+    line-height:1.05;
+    font-weight:400;
+    margin-bottom:20px;
+}
 
+p{
+    font-size:16px;
+    line-height:1.75;
+    max-width:500px;
+    margin-bottom:15px;
+}
+
+.hand{
+    font-family:"Patrick Hand", cursive;
+    font-size:23px;
+    line-height:1.4;
+}
+
+/* BUTTONS */
+
+.button-row{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    background:#eee3d0;
+    color:#413a34;
+    padding:12px 20px;
+    border-radius:5px;
+    font-family:"DM Sans",sans-serif;
+    font-size:14px;
+    cursor:pointer;
+    box-shadow:0 2px 0 rgba(60,50,40,.1);
+    transition:.2s ease;
+}
+
+button:hover{
+    transform:translateY(-2px) rotate(-1deg);
+    background:#e6d7bd;
+}
+
+button:active{
+    transform:translateY(0);
+}
+
+/* DOODLES */
+
+.doodle{
+    font-family:"Patrick Hand",cursive;
+    color:#9b9084;
+    position:absolute;
+    user-select:none;
+}
+
+.star{
     top:120px;
-
-    left:30px;
+    right:45px;
+    font-size:25px;
+    transform:rotate(12deg);
 }
 
+.arrow{
+    bottom:105px;
+    right:45px;
+    font-size:28px;
+    transform:rotate(-8deg);
+}
 
-/* =========================
-   MOBILE
-========================= */
+/* POLAROID */
+
+.polaroid{
+    width:170px;
+    background:#fffdf7;
+    padding:9px 9px 28px;
+    box-shadow:0 5px 12px rgba(0,0,0,.12);
+    transform:rotate(-4deg);
+    margin:8px 0 28px 8px;
+}
+
+.polaroid-inner{
+    height:130px;
+    background:#e7ded0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:"Patrick Hand",cursive;
+    font-size:18px;
+    color:#8b8073;
+}
+
+/* QUESTIONS */
+
+.question-number{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    color:#9a8e80;
+    margin-bottom:8px;
+}
+
+.question{
+    font-family:"Patrick Hand",cursive;
+    font-size:31px;
+    line-height:1.15;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+}
+
+.option{
+    text-align:left;
+    width:100%;
+    background:rgba(255,255,255,.35);
+    border:1px solid rgba(100,90,80,.13);
+    box-shadow:none;
+    padding:14px 16px;
+}
+
+.option:hover{
+    background:#eee2ce;
+}
+
+/* RESULT */
+
+.result{
+    margin-top:25px;
+    font-family:"Patrick Hand",cursive;
+    font-size:25px;
+}
+
+.status{
+    font-size:12px;
+    color:#988d82;
+    margin-top:6px;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:35px;
+    font-family:"Patrick Hand",cursive;
+    color:#a0978d;
+    font-size:15px;
+}
+
+/* MOBILE */
 
 @media(max-width:600px){
 
     body{
-
-        padding:10px;
-
-        /*
-           Allow the paper to become taller
-           than the phone screen.
-        */
-
         align-items:flex-start;
-
-        justify-content:center;
-
-        overflow-y:auto;
-
-        overflow-x:hidden;
-
+        padding:10px;
     }
-
 
     .paper{
-
         width:96vw;
-
-        min-height:
-            calc(100vh - 20px);
-
+        min-height:calc(100vh - 20px);
         height:auto;
-
-        margin:10px 0;
-
-        padding:
-            65px 24px 50px;
-
+        padding:55px 35px 45px;
     }
 
-
-    .screen{
-
-        min-height:0;
-
-        padding-bottom:25px;
-
+    .paper::after{
+        left:25px;
     }
-
-
-    .corner{
-
-        display:none;
-
-    }
-
-
-    p{
-
-        font-size:16px;
-
-        line-height:1.65;
-
-    }
-
 
     h1{
-
-        font-size:64px;
-
+        font-size:48px;
     }
-
 
     h2{
-
-        font-size:46px;
-
+        font-size:40px;
     }
 
-
-    .polaroid{
-
-        width:155px;
-
-        height:155px;
-
-        margin-bottom:22px;
-
+    p{
+        font-size:15px;
     }
 
+    .button-row{
+        flex-direction:column;
+    }
 
-    .choice{
-
+    .button-row button{
         width:100%;
-
-        max-width:100%;
-
-        gap:10px;
-
     }
 
-
-    .choice button{
-
-        width:100%;
-
-        min-height:54px;
-
-        padding:
-            14px 15px;
-
-        font-size:14px;
-
-        line-height:1.45;
-
+    .star{
+        right:20px;
     }
 
-
-    .note{
-
-        margin:
-            18px 0;
-
+    .arrow{
+        right:20px;
     }
 
-
-    .btn{
-
-        font-size:14px;
-
-        padding:
-            12px 16px;
-
+    .corner.one{
+        right:15px;
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<main class="paper">
-
+<div class="paper">
 
     <div class="tape"></div>
 
+    <div class="corner one">don't overthink this.</div>
+    <div class="corner two">made with questionable courage ♡</div>
 
-    <div class="corner c1">
+    <div class="doodle star">✦</div>
+    <div class="doodle arrow">↗</div>
 
-        for one particular person ♡
+    <div class="content">
 
-    </div>
+        <!-- SCREEN 1 -->
 
+        <section class="screen active" id="screen1">
 
-    <div class="corner c2">
+            <div class="small">a tiny confession</div>
 
-        don't overthink this
-
-    </div>
-
-
-    <span class="star s1">✦</span>
-
-    <span class="star s2">·</span>
-
-    <span class="star s3">✧</span>
-
-    <span class="star s4">·</span>
-
-    <span class="star s5">✦</span>
-
-
-
-    <!-- =========================
-         PAGE 1
-    ========================== -->
-
-    <section
-        class="screen active"
-        id="s1"
-    >
-
-        <div class="kicker">
-
-            a very small website
-
-        </div>
-
-
-        <h1>
-
-            hey,<br>
-
-            <span class="underline">
-
-                you.
-
-            </span>
-
-        </h1>
-
-
-        <p>
-
-            I could've just sent a message.
-
-        </p>
-
-
-        <p>
-
-            But where's the fun in that?
-
-        </p>
-
-
-        <div class="buttons">
-
-            <button
-                class="btn primary"
-                onclick="go(2)"
-            >
-
-                okay, show me →
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         PAGE 2
-    ========================== -->
-
-    <section
-        class="screen"
-        id="s2"
-    >
-
-        <div class="polaroid">
-
-            <div class="fakepic">
-
-                ♡
-
-            </div>
-
-
-            <small>
-
-                you, unfortunately
-
-            </small>
-
-        </div>
-
-
-        <div class="kicker">
-
-            tiny problem
-
-        </div>
-
-
-        <h2>
-
-            I've been<br>
-
-            smiling at my phone.
-
-        </h2>
-
-
-        <p>
-
-            Which is usually not a good sign.
-
-        </p>
-
-
-        <div class="note">
+            <h1>hey, you.</h1>
 
             <p>
-
-                ...especially when I know exactly
-                who's on the other end.
-
+                I could've just sent a message.
             </p>
 
-        </div>
+            <p class="hand">
+                But where's the fun in that?
+            </p>
 
+            <div class="button-row">
+                <button onclick="nextScreen(2)">
+                    okay... continue →
+                </button>
+            </div>
 
-        <button
-            class="btn"
-            onclick="go(3)"
-        >
+        </section>
 
-            hmm... continue
 
-        </button>
+        <!-- SCREEN 2 -->
 
-    </section>
+        <section class="screen" id="screen2">
 
+            <div class="small">so here's the thing</div>
 
+            <h2>I've been smiling at my phone.</h2>
 
-    <!-- =========================
-         PAGE 3
-    ========================== -->
+            <p>
+                Which is usually not a good sign.
+            </p>
 
-    <section
-        class="screen"
-        id="s3"
-    >
+            <p>
+                ...especially when I know exactly who's on the other end.
+            </p>
 
-        <div class="doodle">
+            <div class="polaroid">
+                <div class="polaroid-inner">
+                    definitely not suspicious
+                </div>
+            </div>
 
-            ✿ okay, confession time ✿
+            <div class="button-row">
+                <button onclick="nextScreen(3)">
+                    keep going →
+                </button>
+            </div>
 
-        </div>
+        </section>
 
 
-        <h2>
+        <!-- SCREEN 3 -->
 
-            I like you.
+        <section class="screen" id="screen3">
 
-        </h2>
+            <div class="small">okay, fine</div>
 
+            <h1>I like you.</h1>
 
-        <p id="typing"></p>
+            <p id="typingText"></p>
 
+            <p>
+                Not in a “let's decide our future” kind of way.
+            </p>
 
-        <p>
+            <p>
+                I just... really like talking to you.
+            </p>
 
-            Not in a
-            “let's decide our future”
-            kind of way.
+            <div class="button-row">
+                <button onclick="nextScreen(4)">
+                    there's more? →
+                </button>
+            </div>
 
-        </p>
+        </section>
 
 
-        <p>
+        <!-- SCREEN 4 -->
 
-            Just a very simple
+        <section class="screen" id="screen4">
 
-            <span
-                class="hand"
-                style="
-                font-size:28px;
-                color:#d26f84;
-                "
-            >
+            <div class="small">honestly</div>
 
-                “I really like talking to you.”
+            <h2>I'd like to know you better.</h2>
 
-            </span>
+            <p>
+                That's honestly it.
+            </p>
 
-            kind of way.
+            <p>
+                I'd like to keep talking, keep laughing at dumb things,
+                and see where this little thing between us goes.
+            </p>
 
-        </p>
+            <p class="hand">
+                So... I thought I'd ask instead of guessing.
+            </p>
 
+            <div class="button-row">
+                <button onclick="nextScreen(5)">
+                    okay, ask me something →
+                </button>
+            </div>
 
-        <button
-            class="btn primary"
-            id="next3"
-            style="display:none"
-            onclick="go(4)"
-        >
-
-            there's one more thing →
-
-        </button>
-
-    </section>
-
-
-
-    <!-- =========================
-         PAGE 4
-    ========================== -->
-
-    <section
-        class="screen"
-        id="s4"
-    >
-
-        <div class="kicker">
-
-            no pressure, promise
-
-        </div>
-
-
-        <h2>
-
-            I'd like to<br>
-
-            <span class="underline">
-
-                know you better.
-
-            </span>
-
-        </h2>
-
-
-        <p>
-
-            That's honestly it.
-
-        </p>
-
-
-        <p>
-
-            I'd like to keep talking,
-            keep laughing at dumb things,
-            and see where this little thing
-            between us goes.
-
-        </p>
-
-
-        <p
-            class="hand"
-            style="
-            font-size:27px;
-            color:#9b777d;
-            "
-        >
-
-            So... I thought I'd ask
-            instead of guessing.
-
-        </p>
-
-
-        <button
-            class="btn primary"
-            onclick="go(5)"
-        >
-
-            your turn ♡
-
-        </button>
-
-    </section>
-
-
-
-    <!-- =========================
-         PAGE 5
-         4 QUESTIONS
-    ========================== -->
-
-    <section
-        class="screen"
-        id="s5"
-    >
-
-        <div class="kicker">
-
-            extremely important questions
-
-        </div>
-
-
-        <h2>
-
-            okay, final round.
-
-        </h2>
-
-
-        <p
-            class="hand"
-            style="
-            font-size:28px;
-            color:#756166;
-            "
-        >
-
-            choose wisely.
-            there are consequences.
-
-        </p>
-
+        </section>
 
 
         <!-- QUESTION 1 -->
 
-        <div
-            id="question1"
-            class="question"
-        >
+        <section class="screen" id="screen5">
 
-            <p>
+            <div class="question-number">
+                question 01 / 04
+            </div>
 
-                🐸 Would you rather have
-                a frog as your roommate
-                or a duck?
+            <div class="question">
+                Important question:
+                if we lived together, who gets the better side of the bed?
+            </div>
 
-            </p>
+            <div class="options">
 
-
-            <div class="choice">
-
-                <button
-                    onclick="sillyAnswer()"
-                >
-
-                    🐸 Frog roommate
-
+                <button class="option" onclick="nextScreen(6)">
+                    obviously me. I have standards.
                 </button>
 
+                <button class="option" onclick="nextScreen(6)">
+                    you. I'm generous like that.
+                </button>
 
-                <button
-                    onclick="sillyAnswer()"
-                >
+                <button class="option" onclick="nextScreen(6)">
+                    we fight for it every night.
+                </button>
 
-                    🦆 Duck roommate
-
+                <button class="option" onclick="nextScreen(6)">
+                    we sleep on the floor. problem solved.
                 </button>
 
             </div>
 
-        </div>
-
+        </section>
 
 
         <!-- QUESTION 2 -->
 
-        <div
-            id="question2"
-            class="question"
-            style="display:none"
-        >
+        <section class="screen" id="screen6">
 
-            <p>
+            <div class="question-number">
+                question 02 / 04
+            </div>
 
-                🍟 We are sharing fries.
-                Who gets the last one?
+            <div class="question">
+                We have one last french fry.
+                What happens?
+            </div>
 
-            </p>
+            <div class="options">
 
-
-            <div class="choice">
-
-                <button
-                    onclick="sillyAnswer()"
-                >
-
-                    🍟 Me. Obviously.
-
+                <button class="option" onclick="nextScreen(7)">
+                    I give it to you ♡
                 </button>
 
+                <button class="option" onclick="nextScreen(7)">
+                    I eat it before you notice.
+                </button>
 
-                <button
-                    onclick="sillyAnswer()"
-                >
+                <button class="option" onclick="nextScreen(7)">
+                    we split it like civilized people.
+                </button>
 
-                    🍟 You. I'm generous.
-
+                <button class="option" onclick="nextScreen(7)">
+                    whoever grabs it first wins.
                 </button>
 
             </div>
 
-        </div>
-
+        </section>
 
 
         <!-- QUESTION 3 -->
 
-        <div
-            id="question3"
-            class="question"
-            style="display:none"
-        >
+        <section class="screen" id="screen7">
 
-            <p>
+            <div class="question-number">
+                question 03 / 04
+            </div>
 
-                🐈 Very serious question:
-                if you could have any animal
-                as a tiny magical sidekick,
-                what are you choosing?
+            <div class="question">
+                You get a tiny magical sidekick.
+                Who are you choosing?
+            </div>
 
-            </p>
+            <div class="options">
 
-
-            <div class="choice">
-
-                <button
-                    onclick="sillyAnswer()"
-                >
-
-                    🐈 Tiny cat
-
+                <button class="option" onclick="nextScreen(8)">
+                    🐱 tiny cat
                 </button>
 
-
-                <button
-                    onclick="sillyAnswer()"
-                >
-
-                    🐉 Tiny dragon
-
+                <button class="option" onclick="nextScreen(8)">
+                    🐉 pocket dragon
                 </button>
 
-
-                <button
-                    onclick="sillyAnswer()"
-                >
-
-                    🐧 Tiny penguin
-
+                <button class="option" onclick="nextScreen(8)">
+                    🐧 emotionally supportive penguin
                 </button>
 
-
-                <button
-                    onclick="sillyAnswer()"
-                >
-
-                    🦫 Tiny capybara
-
+                <button class="option" onclick="nextScreen(8)">
+                    🦫 ridiculously powerful capybara
                 </button>
 
             </div>
 
+        </section>
+
+
+        <!-- FINAL QUESTION -->
+
+        <section class="screen" id="screen8">
+
+            <div class="question-number">
+                okay... the actual question
+            </div>
+
+            <div class="question">
+                what do you actually feel about me?
+            </div>
+
+            <div class="options">
+
+                <button
+                    class="option"
+                    onclick="sendChoice('I like you too ❤️')">
+                    I like you too ❤️
+                </button>
+
+                <button
+                    class="option"
+                    onclick="sendChoice('I like you, but I need some time ❤️')">
+                    I like you, but I need some time ❤️
+                </button>
+
+                <button
+                    class="option"
+                    onclick="sendChoice('I am not sure yet')">
+                    I am not sure yet
+                </button>
+
+                <button
+                    class="option"
+                    onclick="sendChoice('I do not feel the same way')">
+                    I do not feel the same way
+                </button>
+
+            </div>
+
+            <div class="result" id="result"></div>
+            <div class="status" id="status"></div>
+
+        </section>
+
+
+        <div class="footer">
+            whatever your answer is, thank you for reading this far ♡
         </div>
 
+    </div>
 
-
-        <!-- QUESTION 4
-             REAL QUESTION -->
-
-        <div
-            id="question4"
-            class="question"
-            style="display:none"
-        >
-
-            <div class="doodle">
-
-                okay... enough nonsense.
-
-            </div>
-
-
-            <h2>
-
-                one actual question.
-
-            </h2>
-
-
-            <p
-                class="hand"
-                style="
-                font-size:29px;
-                color:#756166;
-                "
-            >
-
-                what do you actually
-                feel about me?
-
-            </p>
-
-
-            <div class="choice">
-
-
-                <button
-                    onclick="sendChoice(
-                        'I like you too ❤️'
-                    )"
-                >
-
-                    ♡ I like you too
-
-                </button>
-
-
-
-                <button
-                    onclick="sendChoice(
-                        'I like you, but I need some time ❤️'
-                    )"
-                >
-
-                    ♡ I like you,
-                    but I need some time
-
-                </button>
-
-
-
-                <button
-                    onclick="sendChoice(
-                        'I am not sure yet'
-                    )"
-                >
-
-                    ♡ I'm not sure yet
-
-                </button>
-
-
-
-                <button
-                    onclick="sendChoice(
-                        'I do not feel the same way'
-                    )"
-                >
-
-                    ♡ I don't feel the same way
-
-                </button>
-
-
-            </div>
-
-
-            <div
-                id="result"
-                class="result"
-            ></div>
-
-
-            <div
-                id="status"
-                style="
-                font-size:12px;
-                color:#a99da0;
-                "
-            ></div>
-
-        </div>
-
-    </section>
-
-
-</main>
-
+</div>
 
 
 <script>
 
-
-/* =====================================================
+/* =========================
    FORMSPREE
-
-   LEAVE THIS ALONE FOR NOW.
-   WE WILL ADD YOUR URL LATER.
-===================================================== */
+   ========================= */
 
 const FORMSPREE_URL =
-"YOUR_FORMSPREE_URL_HERE";
+"https://formspree.io/f/xvkzpdry";
 
 
+/* =========================
+   SCREEN NAVIGATION
+   ========================= */
 
-/* =====================================================
-   PAGE NAVIGATION
-===================================================== */
+function nextScreen(number){
 
-function go(number){
-
-    document
-        .querySelectorAll(".screen")
-        .forEach(screen => {
-
-            screen.classList.remove("active");
-
-        });
-
-
-    document
-        .getElementById("s" + number)
-        .classList.add("active");
-
-
-    if(number === 3){
-
-        typeText();
-
-    }
-
-
-    /*
-       When opening the next page,
-       bring the phone back to the top.
-    */
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
     });
 
+    const next = document.getElementById("screen" + number);
+
+    if(next){
+        next.classList.add("active");
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    if(number === 3){
+        startTyping();
+    }
 }
 
 
-
-/* =====================================================
+/* =========================
    TYPING EFFECT
-===================================================== */
+   ========================= */
 
-let alreadyTyped = false;
+let typingStarted = false;
 
+function startTyping(){
 
-function typeText(){
+    if(typingStarted) return;
 
-    if(alreadyTyped){
-
-        return;
-
-    }
-
-
-    alreadyTyped = true;
-
+    typingStarted = true;
 
     const text =
-        "This is the part where I pretend I wasn't nervous writing this. I was. A little.";
-
+    "This is the part where I pretend I wasn't nervous writing this. I was. A little.";
 
     const element =
-        document.getElementById("typing");
-
+    document.getElementById("typingText");
 
     let index = 0;
-
 
     function type(){
 
         if(index < text.length){
 
-            element.textContent +=
-                text[index];
+            element.textContent += text.charAt(index);
 
             index++;
 
-
-            setTimeout(
-                type,
-                32
-            );
-
+            setTimeout(type,35);
         }
-
-
-        else{
-
-            document
-                .getElementById("next3")
-                .style.display =
-                "inline-block";
-
-        }
-
     }
-
 
     type();
-
 }
 
 
-
-/* =====================================================
-   SILLY QUESTIONS
-
-   These DO NOT send anything anywhere.
-
-   They simply move to the next question.
-===================================================== */
-
-function sillyAnswer(){
-
-    const q1 =
-        document.getElementById(
-            "question1"
-        );
-
-
-    const q2 =
-        document.getElementById(
-            "question2"
-        );
-
-
-    const q3 =
-        document.getElementById(
-            "question3"
-        );
-
-
-    const q4 =
-        document.getElementById(
-            "question4"
-        );
-
-
-
-    /*
-       QUESTION 1
-       ↓
-       QUESTION 2
-    */
-
-    if(
-        q1.style.display !==
-        "none"
-    ){
-
-        q1.style.display =
-            "none";
-
-        q2.style.display =
-            "block";
-
-        window.scrollTo({
-
-            top:0,
-
-            behavior:"smooth"
-
-        });
-
-        return;
-
-    }
-
-
-
-    /*
-       QUESTION 2
-       ↓
-       QUESTION 3
-    */
-
-    if(
-        q2.style.display !==
-        "none"
-    ){
-
-        q2.style.display =
-            "none";
-
-        q3.style.display =
-            "block";
-
-        window.scrollTo({
-
-            top:0,
-
-            behavior:"smooth"
-
-        });
-
-        return;
-
-    }
-
-
-
-    /*
-       QUESTION 3
-       ↓
-       REAL QUESTION
-    */
-
-    if(
-        q3.style.display !==
-        "none"
-    ){
-
-        q3.style.display =
-            "none";
-
-        q4.style.display =
-            "block";
-
-        window.scrollTo({
-
-            top:0,
-
-            behavior:"smooth"
-
-        });
-
-    }
-
-}
-
-
-
-/* =====================================================
-   REAL CONFESSION RESPONSE
-
-   ONLY THIS FUNCTION SENDS DATA.
-===================================================== */
+/* =========================
+   SEND FINAL RESPONSE
+   ========================= */
 
 async function sendChoice(choice){
 
     const result =
-        document.getElementById(
-            "result"
-        );
-
+    document.getElementById("result");
 
     const status =
-        document.getElementById(
-            "status"
-        );
+    document.getElementById("status");
 
-
-    /*
-       Immediate response.
-    */
 
     result.textContent =
-        "okay... noted ♡";
+    "okay... noted ♡";
 
+    status.textContent =
+    "sending...";
 
-
-    /*
-       FORMSPREE IS NOT CONNECTED YET.
-    */
-
-    if(
-        FORMSPREE_URL ===
-        "YOUR_FORMSPREE_URL_HERE"
-    ){
-
-        status.textContent =
-            "(response connection will be added later)";
-
-        return;
-
-    }
-
-
-
-    /*
-       SEND ONLY THE FINAL ANSWER
-    */
 
     try{
 
         const response =
-            await fetch(
+        await fetch(
+            FORMSPREE_URL,
+            {
+                method:"POST",
 
-                FORMSPREE_URL,
+                headers:{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                },
 
-                {
+                body:JSON.stringify({
 
-                    method:"POST",
+                    response:choice,
 
-                    headers:{
+                    type:"confession_response"
 
-                        "Content-Type":
-                            "application/json",
-
-                        "Accept":
-                            "application/json"
-
-                    },
-
-
-                    body:
-
-                        JSON.stringify({
-
-                            response:
-                                choice,
-
-                            type:
-                                "confession_response"
-
-                        })
-
-                }
-
-            );
-
+                })
+            }
+        );
 
 
         if(response.ok){
 
             result.textContent =
-                "thank you for being honest ♡";
-
+            "thank you for being honest ♡";
 
             status.textContent =
-                "sent.";
+            "your answer has been sent.";
 
-        }
-
-
-        else{
+        }else{
 
             throw new Error();
 
         }
 
-    }
-
-
-    catch(error){
+    }catch(error){
 
         result.textContent =
-            "hmm... something went wrong :(";
-
+        "hmm... something went wrong :(";
 
         status.textContent =
-            "please try again.";
+        "please try again.";
 
     }
 
 }
 
 </script>
-
 
 </body>
 </html>
