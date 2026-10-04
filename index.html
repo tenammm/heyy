@@ -18,6 +18,11 @@
 }
 
 
+html{
+    min-height:100%;
+}
+
+
 body{
 
     min-height:100vh;
@@ -36,7 +41,15 @@ body{
 
     padding:20px;
 
-    overflow:hidden;
+    /*
+       IMPORTANT:
+       The old version had overflow:hidden.
+       This allows phones to scroll when
+       the content is taller than the screen.
+    */
+
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 
 
@@ -49,6 +62,8 @@ body{
     width:min(94vw,720px);
 
     min-height:650px;
+
+    height:auto;
 
     background:#fffaf2;
 
@@ -159,7 +174,14 @@ body{
 
     z-index:3;
 
-    min-height:540px;
+    /*
+       IMPORTANT:
+       No fixed 540px height.
+       This allows the content to
+       grow naturally on phones.
+    */
+
+    min-height:0;
 
     flex-direction:column;
 
@@ -349,6 +371,8 @@ p{
 
     width:max-content;
 
+    max-width:100%;
+
     border:
         1px solid #ded1d0;
 
@@ -513,7 +537,9 @@ p{
 
     flex-direction:column;
 
-    gap:9px;
+    gap:10px;
+
+    width:100%;
 
     max-width:470px;
 
@@ -523,10 +549,14 @@ p{
 
 .choice button{
 
+    width:100%;
+
+    min-height:52px;
+
     text-align:left;
 
     padding:
-        15px 17px;
+        14px 17px;
 
     border:
         1px solid #eadfd8;
@@ -540,6 +570,8 @@ p{
     font-family:inherit;
 
     font-size:15px;
+
+    line-height:1.4;
 
     cursor:pointer;
 
@@ -641,15 +673,44 @@ p{
 
         padding:10px;
 
+        /*
+           Allow the paper to become taller
+           than the phone screen.
+        */
+
+        align-items:flex-start;
+
+        justify-content:center;
+
+        overflow-y:auto;
+
+        overflow-x:hidden;
+
     }
 
 
     .paper{
 
-        padding:
-            48px 27px;
+        width:96vw;
 
-        min-height:650px;
+        min-height:
+            calc(100vh - 20px);
+
+        height:auto;
+
+        margin:10px 0;
+
+        padding:
+            65px 24px 50px;
+
+    }
+
+
+    .screen{
+
+        min-height:0;
+
+        padding-bottom:25px;
 
     }
 
@@ -664,6 +725,78 @@ p{
     p{
 
         font-size:16px;
+
+        line-height:1.65;
+
+    }
+
+
+    h1{
+
+        font-size:64px;
+
+    }
+
+
+    h2{
+
+        font-size:46px;
+
+    }
+
+
+    .polaroid{
+
+        width:155px;
+
+        height:155px;
+
+        margin-bottom:22px;
+
+    }
+
+
+    .choice{
+
+        width:100%;
+
+        max-width:100%;
+
+        gap:10px;
+
+    }
+
+
+    .choice button{
+
+        width:100%;
+
+        min-height:54px;
+
+        padding:
+            14px 15px;
+
+        font-size:14px;
+
+        line-height:1.45;
+
+    }
+
+
+    .note{
+
+        margin:
+            18px 0;
+
+    }
+
+
+    .btn{
+
+        font-size:14px;
+
+        padding:
+            12px 16px;
 
     }
 
@@ -1045,20 +1178,18 @@ p{
 
             <div class="choice">
 
-                <button onclick="sillyAnswer(
-                    'frog',
-                    'Correct. The frog would probably pay rent in emotional support. 🐸'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🐸 Frog roommate
 
                 </button>
 
 
-                <button onclick="sillyAnswer(
-                    'duck',
-                    'Interesting choice. The duck has definitely already judged you. 🦆'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🦆 Duck roommate
 
@@ -1088,20 +1219,18 @@ p{
 
             <div class="choice">
 
-                <button onclick="sillyAnswer(
-                    'me',
-                    'Bold of you to assume I was going to share the last one. 😭'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🍟 Me. Obviously.
 
                 </button>
 
 
-                <button onclick="sillyAnswer(
-                    'you',
-                    'Okay fine... you can have it. But I am emotionally devastated. 😔'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🍟 You. I'm generous.
 
@@ -1133,40 +1262,36 @@ p{
 
             <div class="choice">
 
-                <button onclick="sillyAnswer(
-                    'cat',
-                    'A tiny magical cat. Honestly, elite decision. 🐈✨'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🐈 Tiny cat
 
                 </button>
 
 
-                <button onclick="sillyAnswer(
-                    'dragon',
-                    'A tiny dragon?! Okay, you win. That is objectively cool. 🐉'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🐉 Tiny dragon
 
                 </button>
 
 
-                <button onclick="sillyAnswer(
-                    'penguin',
-                    'A tiny penguin. I respect this level of chaos. 🐧'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🐧 Tiny penguin
 
                 </button>
 
 
-                <button onclick="sillyAnswer(
-                    'capybara',
-                    'A tiny capybara. You have excellent taste. 🦫'
-                )">
+                <button
+                    onclick="sillyAnswer()"
+                >
 
                     🦫 Tiny capybara
 
@@ -1178,7 +1303,8 @@ p{
 
 
 
-        <!-- QUESTION 4 REAL ONE -->
+        <!-- QUESTION 4
+             REAL QUESTION -->
 
         <div
             id="question4"
@@ -1295,11 +1421,10 @@ p{
 
 
 /* =====================================================
-   IMPORTANT
+   FORMSPREE
 
-   WE WILL PUT YOUR FORMSPREE URL HERE LATER.
-
-   DO NOT CHANGE THIS YET.
+   LEAVE THIS ALONE FOR NOW.
+   WE WILL ADD YOUR URL LATER.
 ===================================================== */
 
 const FORMSPREE_URL =
@@ -1332,6 +1457,20 @@ function go(number){
         typeText();
 
     }
+
+
+    /*
+       When opening the next page,
+       bring the phone back to the top.
+    */
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
 
 }
 
@@ -1384,6 +1523,7 @@ function typeText(){
 
         }
 
+
         else{
 
             document
@@ -1403,85 +1543,126 @@ function typeText(){
 
 
 /* =====================================================
-   SILLY QUESTION SYSTEM
+   SILLY QUESTIONS
 
-   NOTHING HERE IS SENT ANYWHERE.
+   These DO NOT send anything anywhere.
+
+   They simply move to the next question.
 ===================================================== */
 
-function sillyAnswer(
-    answer,
-    message
-){
+function sillyAnswer(){
 
-    const question1 =
+    const q1 =
         document.getElementById(
             "question1"
         );
 
-    const question2 =
+
+    const q2 =
         document.getElementById(
             "question2"
         );
 
-    const question3 =
+
+    const q3 =
         document.getElementById(
             "question3"
         );
 
-    const question4 =
+
+    const q4 =
         document.getElementById(
             "question4"
         );
 
 
-    /* question 1 → question 2 */
+
+    /*
+       QUESTION 1
+       ↓
+       QUESTION 2
+    */
 
     if(
-        question1.style.display !==
+        q1.style.display !==
         "none"
     ){
 
-        question1.style.display =
+        q1.style.display =
             "none";
 
-        question2.style.display =
+        q2.style.display =
             "block";
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
 
         return;
 
     }
 
 
-    /* question 2 → question 3 */
+
+    /*
+       QUESTION 2
+       ↓
+       QUESTION 3
+    */
 
     if(
-        question2.style.display !==
+        q2.style.display !==
         "none"
     ){
 
-        question2.style.display =
+        q2.style.display =
             "none";
 
-        question3.style.display =
+        q3.style.display =
             "block";
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
 
         return;
 
     }
 
 
-    /* question 3 → REAL QUESTION */
+
+    /*
+       QUESTION 3
+       ↓
+       REAL QUESTION
+    */
 
     if(
-        question3.style.display !==
+        q3.style.display !==
         "none"
     ){
 
-        question3.style.display =
+        q3.style.display =
             "none";
 
-        question4.style.display =
+        q4.style.display =
             "block";
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
 
     }
 
@@ -1510,18 +1691,16 @@ async function sendChoice(choice){
 
 
     /*
-       Give an immediate cute response.
+       Immediate response.
     */
 
     result.textContent =
         "okay... noted ♡";
 
 
-    /*
-       FORM NOT CONNECTED YET.
 
-       Once we create the Formspree form,
-       we'll replace the placeholder URL.
+    /*
+       FORMSPREE IS NOT CONNECTED YET.
     */
 
     if(
@@ -1538,9 +1717,9 @@ async function sendChoice(choice){
 
 
 
-    /* ==========================================
-       SEND ONLY THE REAL ANSWER
-    ========================================== */
+    /*
+       SEND ONLY THE FINAL ANSWER
+    */
 
     try{
 
