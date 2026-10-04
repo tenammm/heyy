@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okay... I Have Something To Say 💌</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    min-height:100vh; overflow:hidden; font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+    background:radial-gradient(circle at top,#25134f 0,#100b24 42%,#070711 100%);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+  }
+  .stars,.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+  .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.65;animation:twinkle 2s infinite alternate}
+  @keyframes twinkle{to{opacity:.12;transform:scale(.5)}}
+  .heart{position:absolute;bottom:-30px;font-size:20px;animation:float 7s linear forwards;opacity:0}
+  @keyframes float{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.8}100%{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+  .card{
+    width:min(92vw,650px); min-height:520px; padding:42px 30px; text-align:center;
+    border:1px solid rgba(255,255,255,.14); border-radius:30px;
+    background:rgba(18,14,38,.72); backdrop-filter:blur(18px);
+    box-shadow:0 25px 80px rgba(0,0,0,.45),0 0 60px rgba(143,75,255,.12);
+    position:relative; z-index:2; display:flex; align-items:center; justify-content:center;
+  }
+  .screen{display:none;animation:enter .55s ease both;width:100%}
+  .screen.active{display:block}
+  @keyframes enter{from{opacity:0;transform:translateY(15px) scale(.98)}to{opacity:1;transform:none}}
+  .badge{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(166,92,255,.15);border:1px solid rgba(195,140,255,.3);font-size:12px;letter-spacing:1px;margin-bottom:22px}
+  h1{font-size:clamp(32px,7vw,58px);line-height:1.02;margin-bottom:18px}
+  h2{font-size:clamp(27px,6vw,42px);margin-bottom:18px}
+  p{color:#cfc8df;font-size:17px;line-height:1.65;max-width:520px;margin:0 auto 26px}
+  .accent{background:linear-gradient(90deg,#ff79c6,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .game{font-size:60px;margin-bottom:12px;filter:drop-shadow(0 8px 18px rgba(180,90,255,.3))}
+  button{
+    border:0;border-radius:999px;padding:14px 24px;font-size:16px;font-weight:700;cursor:pointer;
+    transition:.2s transform,.2s box-shadow,.2s background;color:#fff;
+  }
+  button:hover{transform:translateY(-3px)}
+  .primary{background:linear-gradient(135deg,#a855f7,#ec4899);box-shadow:0 10px 30px rgba(168,85,247,.3)}
+  .secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);margin-left:8px}
+  .choices{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+  .typing{min-height:110px}
+  .meter{height:5px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden;margin:0 auto 28px;max-width:380px}
+  .meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#a855f7,#ec4899);transition:width .5s}
+  .small{font-size:13px;color:#9189a6}
+  .reply{font-size:20px;color:#fff;margin-top:20px;min-height:32px}
+  .signature{margin-top:28px;color:#a9a0ba;font-style:italic}
+  .emoji-row{font-size:30px;letter-spacing:8px;margin:15px 0 25px}
+  @media(max-width:520px){.card{padding:35px 20px;min-height:500px}p{font-size:16px}.secondary{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="hearts" id="hearts"></div>
+
+<main class="card">
+  <section class="screen active" id="s1">
+    <div class="game">🎮</div>
+    <div class="badge">MATCH FOUND</div>
+    <h1>Hey... <span class="accent">you.</span></h1>
+    <p>We met through MLBB, which is honestly a pretty random way to meet someone.</p>
+    <p>But somehow, two days later, here I am making you a whole website. 😭</p>
+    <button class="primary" onclick="next(2)">Okay, what is this? 👀</button>
+  </section>
+
+  <section class="screen" id="s2">
+    <div class="badge">A LITTLE TIMELINE</div>
+    <h2>It kinda went like this...</h2>
+    <div class="emoji-row">🎮 → 📸 → 💬 → ❤️?</div>
+    <p><b>Game.</b> Then Instagram.<br>
+    Then talking.<br>
+    Then me realizing I actually look forward to your messages.</p>
+    <p class="small">And yes, I know it's only been two days. I have absolutely no defence. 😂</p>
+    <button class="primary" onclick="next(3)">Keep going...</button>
+  </section>
+
+  <section class="screen" id="s3">
+    <div class="badge">THE ACTUAL REASON</div>
+    <h2>I wanted to tell you something.</h2>
+    <div class="meter"><span id="bar"></span></div>
+    <p class="typing" id="typing"></p>
+    <button class="primary" id="reveal" onclick="revealText()">I'm listening 👀</button>
+  </section>
+
+  <section class="screen" id="s4">
+    <div class="emoji-row">🫠 💗 🫣</div>
+    <h1>Okay, fine.</h1>
+    <p>You're kinda becoming my favourite person to talk to.</p>
+    <p>And yeah... <span class="accent"><b>I like you.</b></span></p>
+    <p>I'm not trying to rush anything. I just wanted to be honest and see if you feel even a little bit the same.</p>
+    <button class="primary" onclick="next(5)">So... what do you think? 💌</button>
+  </section>
+
+  <section class="screen" id="s5">
+    <div class="badge">YOUR MOVE 😭</div>
+    <h2>Be honest with me.</h2>
+    <p>You can take your time. No pressure, no awkwardness. I just wanted you to know.</p>
+    <div class="choices">
+      <button class="primary" onclick="answer('YES?! 😭❤️ Okay, you just made my entire day.')">I like you too ❤️</button>
+      <button class="secondary" onclick="answer('Honestly... I’m happy you told me. Let’s see where this goes 👀')">Let's see where this goes 👀</button>
+    </div>
+    <div class="reply" id="reply"></div>
+    <div class="signature">— from the idiot who made you a website after 2 days</div>
+  </section>
+</main>
+
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<90;i++){
+  const s=document.createElement('i'); s.className='star';
+  s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=(Math.random()*2)+'s'; stars.appendChild(s);
+}
+function hearts(){
+  const h=document.createElement('div'); h.className='heart';
+  h.textContent=['💗','💜','✨','💕','♡'][Math.floor(Math.random()*5)];
+  h.style.left=Math.random()*100+'%'; h.style.fontSize=(14+Math.random()*18)+'px';
+  h.style.animationDuration=(5+Math.random()*4)+'s';
+  document.getElementById('hearts').appendChild(h);
+  setTimeout(()=>h.remove(),9000);
+}
+setInterval(hearts,700);
+
+function next(n){
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  if(n===3) setTimeout(()=>document.getElementById('bar').style.width='35%',200);
+}
+let revealed=false;
+function revealText(){
+  if(revealed)return; revealed=true;
+  const el=document.getElementById('typing');
+  const btn=document.getElementById('reveal');
+  const text="I know it's only been two days, so this might be a little crazy... but I really like talking to you. And I think I'm starting to like you.";
+  el.textContent='';
+  btn.style.display='none';
+  let i=0;
+  const timer=setInterval(()=>{
+    el.textContent+=text[i++];
+    if(i>=text.length){clearInterval(timer);document.getElementById('bar').style.width='100%';setTimeout(()=>next(4),900);}
+  },28);
+}
+function answer(msg){
+  document.getElementById('reply').textContent=msg;
+  document.querySelectorAll('#s5 button').forEach(b=>b.style.display='none');
+  for(let i=0;i<18;i++) setTimeout(hearts,i*90);
+}
+</script>
+</body>
+</html>
